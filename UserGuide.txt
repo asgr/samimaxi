@@ -1,4 +1,4 @@
-USER GUIDE For Maxiv1.6
+USER GUIDE For Maxiv1.7
 
 Original code written by:	Aaron Robotham (aaron.robotham@uwa.edu.au)
 modified by:			Aaron Robotham (aaron.robotham@uwa.edu.au)
@@ -23,7 +23,7 @@ Once you have R installed (google "R project") you need to install 4 packages. T
 
 You might need to select a file server from a list, just choose a nearby one.
 
-cd to the directory Maxiv1.4 and do:
+cd to the directory Maxi and do:
 
 > chmod a+x RUNME.r
 
@@ -31,7 +31,7 @@ Now you should be able to type:
 
 > ./RUNME.r samitargets.dat guide.dat specst.dat g09 10
 
-This will populate the folder SAMIG09T1-10 with Target & Guide .fld files (to be passed to MG), a .info file (Useful summary info on the tile produced) and a .r file (an R readable output from the tiling code, can be used for debugging). It also generates a number of plots to summarise the results of the tiling.
+This will populate the folder SAMIG09T1-10 with Target & Guide .fld files (to be passed to MG), a .info file (Useful summary info on the tile produced) and a .r file (an R readable output from the tiling code, can be used for debugging). It also generates a number of plots to summarise the results of the tiling. !!!(This won't work on the GitHub version of the code because I didn't want to make SAMI data fully public!)!!!
 
 The arguments you input correspond to:
 
@@ -43,7 +43,7 @@ NumberOfTilesToMake should be an integer of 1 or more, and specifies the number 
 RUNME is a top level wrapper. To start looking around the code you can type:
 
 > R
-> load('Maxiv1.6.img')		#Or whatever version of Maxi you have
+> source('sourceall.rscript')
 > samitile
 > besttile
 
