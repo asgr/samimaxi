@@ -1,0 +1,46 @@
+#INPUT FILES
+
+#Users should not change *any* LHS names, only RHS column names should be adjusted to match those in the provided ascii catalogues
+
+#LHS is code variable, RHS is input SAMI catalogue column name
+ids		CATID			SAMImain
+ra		RA			SAMImain
+dec		Dec			SAMImain
+survey		SURV_SAMI		SAMImain
+priority	PRI_SAMI		SAMImain
+mag		r_auto			SAMImain
+
+#LHS is code variable, RHS is input guide catalogue column name
+idsguide	GID			SAMIguide
+raguide		RA			SAMIguide
+decguide	DEC			SAMIguide
+magguide	PSFMAG_R		SAMIguide
+
+#LHS is code variable, RHS is input standards catalogue column name
+idsspecst	RowID			SAMIspec
+raspecst	RA			SAMIspec
+decspecst	decl.			SAMIspec
+priorityspecst	priority		SAMIspec
+magspecst	r			SAMIspec
+
+#OUTPUT FILES
+
+#LHS is code variable, RHS is desired output Targets tile column name
+outids		name			OutTile
+outpriority	isel			OutTile
+outra		ra			OutTile
+outdec		dec			OutTile
+outmag		mag			OutTile
+outtype		type			OutTile
+
+#LHS is code variable, RHS is desired output Guides tile column name
+outidsguide		name		OutGuide/OutInfo
+outpriorityguide	isel		OutGuide/OutInfo
+outNhipriguide		Nhipri		OutGuide/OutInfo
+outraguide		ra		OutGuide/OutInfo
+outdecguide		dec		OutGuide/OutInfo
+outmagguide		mag		OutGuide/OutInfo
+
+#LHS is code variable, RHS is desired output Tileinfo column name
+remtileinfo		NRem		OutInfo
+comptileinfo		Comp		OutInfo

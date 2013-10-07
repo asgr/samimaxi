@@ -1,0 +1,269 @@
+USER GUIDE For Maxiv1.6
+
+Original code written by:	Aaron Robotham (aaron.robotham@uwa.edu.au)
+modified by:			Aaron Robotham (aaron.robotham@uwa.edu.au)
+User guide written by:		Aaron Robotham (aaron.robotham@uwa.edu.au)
+
+This is for the preparation of ideal SAMI tiles to be sent to Michael Goodwin (MG from here) for final processing and plate drilling etc.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GETTING STARTED
+
+Once you have R installed (google "R project") you need to install 4 packages. To do this type:
+
+> R
+
+...wait for R to load... then:
+
+> install.packages('fields',dependencies=T)
+> install.packages('sphereplot',dependencies=T)
+> install.packages('magicaxis',dependencies=T)
+> install.packages('plotrix',dependencies=T)
+
+You might need to select a file server from a list, just choose a nearby one.
+
+cd to the directory Maxiv1.4 and do:
+
+> chmod a+x RUNME.r
+
+Now you should be able to type:
+
+> ./RUNME.r samitargets.dat guide.dat specst.dat g09 10
+
+This will populate the folder SAMIG09T1-10 with Target & Guide .fld files (to be passed to MG), a .info file (Useful summary info on the tile produced) and a .r file (an R readable output from the tiling code, can be used for debugging). It also generates a number of plots to summarise the results of the tiling.
+
+The arguments you input correspond to:
+
+> ./RUNME.r inputtargetfile guidefile specstandardsfile region NumberOfTilesToMake
+
+region can currently take the options g09 g12 g15, and specifies the GAMA region you want to produce SAMI tiles for.
+NumberOfTilesToMake should be an integer of 1 or more, and specifies the number of tiles you would like to produce. If survey completes before this is achieved the software will stop.
+
+RUNME is a top level wrapper. To start looking around the code you can type:
+
+> R
+> load('Maxiv1.6.img')		#Or whatever version of Maxi you have
+> samitile
+> besttile
+
+These two functions do most of the "work". "besttile" does everything required to generate the next best tile, "samitile" invokes this repeatally to generate the survey, whilst piecing together the outputs of "besttile" in the most suitable manner.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INPUT FILES EXPLAINED
+
+Data files required:
+
+inputtargetfile		ascii SAMI targets file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
+guidefile		ascii SAMI guides file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
+specstandardsfile	ascii SAMI spectral standards file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
+
+-------------------------
+
+inputtargetfile:
+
+This file can be called whatever you like, but requires the following columns.:
+
+CATAID			Main SAMI catalogue ID (integer). This must be unique from all previous SAMI CATAID values (i.e. GAMA CATAID etc).
+RA			Main SAMI catalogue RA
+DEC			Main SAMI catalogue Dec
+SURVEY_SAMI		Main SAMI catalogue survey class
+PRIORITY_SAMI		Main SAMI catalogue priority class
+R_PETRO			Main SAMI catalogue magnitude
+
+-------------------------
+
+guidefile:
+
+This file can be called whatever you like, but requires the following columns.:
+
+GID			Guide catalogue ID. This must be unique from all previous SAMI GID values.
+RA			Guide catalogue RA
+DEC			Guide catalogue Dec
+PSFMAG_R		Guide catalogue magnitude
+
+-------------------------
+
+specstandardsfile:
+
+This file can be called whatever you like, but requires the following columns.:
+
+SID			Spectral standards catalogue ID. This must be unique from all previous SAMI SID values.
+RA			Spectral standards catalogue RA
+DEC			Spectral standards catalogue Dec
+PRIORITY_CLASS		Spectral standards catalogue priority
+PSFMAG_R		Spectral standards catalogue magnitude
+
+--------------------------------------------------
+
+Parameter files required:
+
+samiparam.par		SAMI main parameter file (user should adjust this for each round of tiling). This file is in the "Params/" directory. There should be no # on first line listing column names.
+samivarnames.par	SAMI variable to column names conversion file (only column names (RHS) should be adjusted by users). This file is in the "Params/" directory. There should be no # on first line listing column names.
+samiplot.par		SAMI plotting parameter file (user probably doesn't need to change these defaults). This file is in the "Params/" directory. There should be no # on first line listing column names.
+
+-------------------------
+
+samiparam.par:
+
+The default settings and descriptions are:
+
+Region                 g09    g12    g15   		GAMA regions centred at 9/12/14.5 hours
+RAmin                  129.0  174.0  211.5 		Minimum RA of each region
+RArange                12     12     12    		RA range
+DECmin                 -1     -2     -2    		Minimum Dec of each region
+DECrange               4      4      4     		Dec range
+TilingType             greedy greedy greedy		Tiling type (options are greedy or dengreedy)
+fovradin               0.5    0.5    0.5   		SAMI FoV
+fovradout              1      1      1     		Extended FoV to send to tile files
+Buffer                 0      0      0     		Survey buffer- tile centre can't be nearer to the edge than this
+Year                   13     13     13    		Year
+Sem                    A      A      A     		Semester
+Run                    1      1      1     		Run number
+Loc                    SAMI09 SAMI12 SAMI15		Name to append to Directory name and files names
+StartNtile             1      1      1     		Start tile number
+mainsurvey             2      2      2     		Starting number for main survey objects in "SURVEY_SAMI" column (i.e. main survey objects can have numbers larger than this- useful to help identify sub-populations of the main survey).
+fillsurvey             1      1      1     		Starting number for filler survey objects in "SURVEY_SAMI" column
+mainpri                2      2      2     		Starting number for main survey objects that need to be targeted in "PRIORITY_SAMI" column (0=done)
+fillpri                1      1      1     		Starting number for filler survey objects that need to be targeted in "PRIORITY_SAMI" column (0=done)
+Nmainin                17     17     17    		Number of main survey objects to be sent to the tile file (only 12 of these can be targeted)
+Nmaininbump            12     12     12    		Number of bundles available isel of targets that don't get a bundle are reduced by one (so even numbers when using the defaults)
+Nmainout               36     36     36    		Number of main survey objects to be added to the outer annulus
+Nfillin                12     12     12    		Number of fillers to be added within SAMI FoV
+Nfillout               36     36     36    		Number of fillers to be added to the outer annulus
+guide2bundleproximity  150    150    150   		Guide to bundle collision radius
+bundle2bundleproximity 229    229    229   		Bundle to bundle collision radius
+centre2bundleproximity 200    200    200   		Plate centre to bundle collision radius (setting to zero leaves it to Mike G to sort out)
+Pclusmainin            9      9      9    		isel for clustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre		
+Punclusmainin          7      7      7      		isel for unclustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre 
+Pmainout               3      3      3      		isel for top priority SAMI main survey targets with 0.5 < r < 1 deg of the proposed tile centre  
+Pfillin                5      5      5      		isel for fillers SAMI targets within 0 < r < 0.5 deg of the proposed tile centre  
+Pfillout               1      1      1      		isel for fillers SAMI targets within 0.5 < r < 1 deg of the proposed tile centre  
+PGbest                 9      9      9     		isel for the massively preferred SAMI guides
+PGall                  7      7      7     		isel for the next best guide options. These guides cover the desired 12 best targets with the 0.5 deg SAMI FoV
+PGin                   5      5      5     		isel for other guides within 0 < r < 1 deg of the preferred tile centre
+PGout                  3      3      3     		isel for other guides within 0.5 < r < 1 deg of the preferred tile centre
+PlotStop               0.95   0.95   0.95  		Completeness target to highlight in plots
+Multiplier	       100    100    100                Sets the internal buffer for nearest neighbour matching- increase for "Ran out of space, increase max.points" error
+-------------------------
+
+samivarnames.par:
+
+The default settings and descriptions are:
+
+Code Variable  		External Column Name	Description
+ids         		CATAID			Main SAMI catalogue ID
+ra             		RA			Main SAMI catalogue RA
+dec            		DEC			Main SAMI catalogue Dec
+survey   		SURVEY_SAMI		Main SAMI catalogue survey class
+priority 		PRIORITY_SAMI		Main SAMI catalogue priority class
+mag        		R_PETRO			Main SAMI catalogue magnitude
+idsguide            	GID			Guide catalogue ID
+raguide             	RA			Guide catalogue RA
+decguide            	DEC			Guide catalogue Dec
+magguide       		PSFMAG_R		Guide catalogue magnitude
+idsspecst            	SID			Spectral standards catalogue ID
+raspecst             	RA			Spectral standards catalogue RA
+decspecst            	DEC			Spectral standards catalogue Dec
+priorityspecst 		PRIORITY_CLASS		Spectral standards catalogue priority
+magspecst       	PSFMAG_R		Spectral standards catalogue magnitude
+outids           	name			Output tile file object ID
+outpriority           	isel			Output tile file object tile priority
+outra             	ra			Output tile file object RA
+outdec            	dec			Output tile file object Dec
+outmag            	mag			Output tile file object magnitude
+outtype           	type			Output tile file object type (1=SAMI, 0=spectral standard)
+outidsguide           	name			Output guide file guide ID
+outpriorityguide      	isel			Output guide file guide tile priority
+outNhipriguide         	Nhipri			Output guide file number of main SAMI survey objects sent to tile reachable by guide
+outraguide             	ra			Output guide file guide RA
+outdecguide            	dec			Output guide file guide Dec
+outmagguide            	mag			Output guide file guide magnitude
+remtileinfo          	NRem			Output TileInfo file main survey targets removed
+comptileinfo           	Comp			Output TileInfo file main survey completeness
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OUTPUT FILES EXPLAINED
+
+Data files output:
+
+Tiles/Targets...		Main tile file containing SAMI targets (to be sent to MG)
+Tiles/Guides...			Guide tile file containing proposed guides (to be sent to MG)
+OutFiles/RemIDSs...		IDs assumed to be removed for each tile
+OutFiles/TileInfo...		Summary info for each tile
+OutFiles/inputtargetfile...	Modifed version of input SAMI catalogue, with priority classes adjusted to reflect the tiling (priority class = 0 for observed targets)
+OutFiles/tilingout.r		The raw R image output from the samitile code- useful for debugging
+Plots/Survey...			Summary plot showing before and after state of survey
+Plots/Tile...			Plot for each tile showing the distribution of targets
+
+
+-------------------------
+
+Tiles/Targets...:
+
+name	SAMI ID
+isel	SAMI tile file priority (see below)
+ra	Target RA
+dec	Target Dec
+mag	Target magnitude
+type	Target type (1=SAMI, 0=spectral standard)
+
+-------------------------
+
+Tiles/Guides...:
+
+name	Guide ID
+isel	Guide tile file priority (see below)
+Nhipri	Number of main SAMI survey objects sent to tile reachable by guide
+ra	Guide RA
+dec	Guide Dec
+mag	Guide magnitude
+
+-------------------------
+
+OutFiles/RemIDs...:
+
+Ntile	Tile number
+name	SAMI ID of target considered to be "observed" on this tile
+
+-------------------------
+
+OutFiles/Guides...:
+
+Ntile	Tile number
+Nrem	Total bundles used (includes fillers)
+Comp	Main survey completeness as of this tile
+name	Guide ID of preferred guide
+isel	Guide tile file priority of preferred guide (see below)
+Nhipri	Number of main SAMI survey objects sent to tile reachable by preferred guide
+ra	Guide RA of preferred guide
+dec	Guide Dec of preferred guide
+mag	Guide magnitude of preferred guide
+
+-------------------------
+
+Meaning of isel in output tile files:
+
+Even values only occur when object meets the conditions of N+1 (high priority odd flag), but it is outside the first Nfillin targets in the output tile file. So you might get 12 isel=9 and 5 isel=8 clustered objects within the SAMI FoV in an output tile file.
+
+isel	Description
+9 	Clustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre (these are objects that are colliding with other targets within 229'', so should be removed ASAP).
+8 	Clustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre, but outside the first 12 targets (so probably won't be targeted).
+7 	Unclustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre.
+6 	Unclustered top priority SAMI main survey targets with 0 < r < 0.5 deg of the proposed tile centre, but outside the first 12 targets (so probably won't be targeted).
+5 	Filler SAMI targets within 0 < r < 0.5 deg of the proposed tile centre.
+4 	Filler SAMI targets within 0 < r < 0.5 deg of the proposed tile centre, but outside the first 12 targets (so probably won't be targeted).
+2 	Top priority SAMI main survey targets with 0.5 < r < 1 deg of the proposed tile centre.
+0 	Filler SAMI targets within 0.5 < r < 1 deg of the proposed tile centre.
+
+Spectra isel equals inputpri+10 for standards in the outer region and inputpri+10+max(inputpri)+1 in the inner region. This ensures that all inner region (SAMI FoV) standards are higher priority than all outer region standards. In practice it is hoped only inner region standards are ever used.
+
+Tiles/Guides... tile file:
+
+isel	Description
+9 	The massively preferred SAMI guides.
+7 	The next best guide options. These guides cover the desired 12 best targets with the 0.5 deg SAMI FoV.
+5 	Other guides within 0 < r < 0.5 deg of the preferred tile centre.
+3 	Other guides within 0.5 < r < 1 deg of the preferred tile centre.

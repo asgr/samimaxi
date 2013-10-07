@@ -1,0 +1,11 @@
+Region	RAmin	RArange DECmin	DECrange	TilingType	fovradin	fovradout	Buffer 	Year	Sem	Run	Loc	StartNtile	mainsurvey	fillsurvey	mainpri	fillpri	Nmainin	Nmaininbump	Nmainout	Nfillin	Nfillout	guide2bundleproximity	bundle2bundleproximity	centre2bundleproximity	Pclusmainin	Punclusmainin	Pmainout	Pfillin	Pfillout	PGbest	PGall	PGin	PGout	PlotStop	Multiplier
+g09	129	12	-1	4		greedy		0.5		1		0	13	A	4	SAMI09	41		8		3		8	3	17	12		36		12	36		150			229			200			9		7		3		5	1		9	7	5	3	0.95		100
+g12	174	12	-2	4		greedy		0.5		1		0	13	A	4	SAMI12	21		8		3		8	3	17	12		36		12	36		150			229			200			9		7		3		5	1		9	7	5	3	0.95		100
+g15	211.5	12	-2	4		greedy		0.5		1		0	13	A	4	SAMI15	41		8		3		8	3	17	12		36		12	36		150			229			200			9		7		3		5	1		9	7	5	3	0.95		100
+a85	10.1	1	-9.8	1		greedy		0.5		1		0	13	B	1	SAMIa85	1		8		3		8	3	17	12		36		12	36		150			229			0			9		7		3		5	1		9	7	5	3	0.95		200
+a2399	329.0	1	-8.2 	1		greedy		0.5		1		0	13	B	1	SAMIa2399	1		8		3		8	3	17	12		36		12	36		150			229			0			9		7		3		5	1		9	7	5	3	0.95		200
+
+a119	13.6	1	-1.7 	1		greedy		0.5		1		0	13	B	1	SAMIa119	1		8		3		8	3	17	12		36		12	36		150			229			0			9		7		3		5	1		9	7	5	3	0.95		200
+
+a168	18.3	1	-0.05 	1		greedy		0.5		1		0	13	B	1	SAMIa168	1		8		3		8	3	17	12		36		12	36		150			229			0			9		7		3		5	1		9	7	5	3	0.95		200
+a3880	336.4	1.2	-31 	1		greedy		0.5		1		0	13	B	1	SAMIa3880	1		8		3		8	3	17	12		36		12	36		150			229			0			9		7		3		5	1		9	7	5	3	0.95		200

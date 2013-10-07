@@ -1,0 +1,35 @@
+#isel col pch cex for SAMI targets and spectral standards
+0	purple	3	1	Fill-Out-Not12
+2	green	3	1	Out-Not12
+4	blue	3	1	Fill-In-Not12
+5	blue	3	2	Fill-In-Top12
+6	red	3	1	Unclus-Not12
+7	red	3	2	Unclus-Top12
+8	black	3	1	Clus-Not12
+9	black	3	2	Clus-Top12
+10	grey	1	1	Standard
+11	grey	1	1	Standard
+12	grey	1	1	Standard
+13	grey	1	1	Standard
+14	grey	1	1	Standard
+15	grey	1	1	Standard
+16	grey	1	1	Standard
+17	grey	1	1	Standard
+18	grey	1	1	Standard
+19	grey	1	1	Standard
+20	grey	1	1	Standard
+21	grey	1	1	Standard
+22	grey	1	1	Standard
+23	grey	1	1	Standard
+24	grey	1	1	Standard
+25	grey	1	1	Standard
+26	grey	1	1	Standard
+27	grey	1	1	Standard
+28	grey	1	1	Standard
+29	grey	1	1	Standard
+
+#isel col pch cex for SAMI guides
+3	orange	4	0.5	OutGuide
+5	orange	4	1	InGuide
+7	brown	4	2	GoodGuide
+9	brown	4	4	BestGuide

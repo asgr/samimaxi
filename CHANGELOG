@@ -1,0 +1,11 @@
+v1.5
+
+Now set to work for generic field centres (previously was constrained to centre on guides).
+
+v1.6
+
+Now reclusters fillers having already removed those within a bundle2bundle radius of a main survey target
+
+v1.7
+
+bug fixed where fillers were always expected in best tile code

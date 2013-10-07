@@ -1,0 +1,10 @@
+source('Code/samitile.r')
+source('Code/noclash.r')
+source('Code/SphHatGuide.r')
+source('Code/besttile.r')
+source('Code/unpick.r')
+source('Code/resample.r')
+source('Code/plotsurvey.r')
+source('Code/SphHat.r')
+source('Code/plottile.r')
+
