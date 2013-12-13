@@ -1,7 +1,7 @@
-USER GUIDE For Maxiv1.7
+USER GUIDE For Maxi v1.7
 
 Original code written by:	Aaron Robotham (aaron.robotham@uwa.edu.au)
-modified by:			Aaron Robotham (aaron.robotham@uwa.edu.au)
+modified by:			        Aaron Robotham (aaron.robotham@uwa.edu.au)
 User guide written by:		Aaron Robotham (aaron.robotham@uwa.edu.au)
 
 This is for the preparation of ideal SAMI tiles to be sent to Michael Goodwin (MG from here) for final processing and plate drilling etc.
@@ -23,7 +23,13 @@ Once you have R installed (google "R project") you need to install 4 packages. T
 
 You might need to select a file server from a list, just choose a nearby one.
 
-cd to the directory Maxi and do:
+Once you've done that you should exit R by typing:
+
+> q()
+
+Assuming you're reading this document, you've presumably downloaded the Maxi code too. At this stage it would be helpful to rename the top level folder of the downloaded code to 'Maxi' (github might name it something else automatically) since I use this in later parts of the instructions.
+
+cd to the directory 'Maxi' and do:
 
 > chmod a+x RUNME.r
 
@@ -47,7 +53,9 @@ RUNME is a top level wrapper. To start looking around the code you can type:
 > samitile
 > besttile
 
-These two functions do most of the "work". "besttile" does everything required to generate the next best tile, "samitile" invokes this repeatally to generate the survey, whilst piecing together the outputs of "besttile" in the most suitable manner.
+These two functions do most of the "work". "besttile" does everything required to generate the next best tile, "samitile" invokes this repeatally to generate the survey, whilst piecing together the outputs of "besttile" in the most suitable manner. Again, if you want to quit and get back to the normal terminal (where you'll run the scripts) just type:
+
+> q()
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -55,7 +63,7 @@ INPUT FILES EXPLAINED
 
 Data files required:
 
-inputtargetfile		ascii SAMI targets file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
+inputtargetfile	ascii SAMI targets file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
 guidefile		ascii SAMI guides file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
 specstandardsfile	ascii SAMI spectral standards file of any name. This file should be placed in the "Data/" directory. There should be no # on first line listing column names.
 
