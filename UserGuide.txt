@@ -1,4 +1,4 @@
-USER GUIDE For Maxi v1.7
+USER GUIDE For Maxi v1.8
 
 Original code written by:	Aaron Robotham (aaron.robotham@uwa.edu.au)
 modified by:			        Aaron Robotham (aaron.robotham@uwa.edu.au)

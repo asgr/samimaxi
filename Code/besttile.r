@@ -1,4 +1,4 @@
-besttile=function(sami,guide,specst,region='g09'){
+besttile=function(sami,guide,specst,region='g09',calcalc=F){
 
 #Read in variable
 info=read.table("Params/samiparam.par",header = T,stringsAsFactors=F)

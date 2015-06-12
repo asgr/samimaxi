@@ -1,6 +1,6 @@
 #!/usr/bin/Rscript --no-init-file
 
-maxiversion='Maxiv1.6'
+maxiversion='Maxiv1.8'
 
 args=commandArgs(TRUE)
 sami=args[1]
