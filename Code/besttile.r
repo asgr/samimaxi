@@ -1,4 +1,4 @@
-besttile=function(sami,guide,specst,region='g09',calcalc=F){
+besttile=function(sami,guide,specst,region='g09'){
 
 #Read in variable
 info=read.table("Params/samiparam.par",header = T,stringsAsFactors=F)
@@ -55,7 +55,7 @@ temp=SphHatGuide(x=ra[freemain],y=dec[freemain],gx=posgrid[,1],gy=posgrid[,2],fo
 
 #Dengreedy tiling density
 if(TilingType=='dengreedy'){
-if(calcall){tempall=SphHatGuide(x=ra[allmain],y=dec[allmain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer,multiplier=Multiplier)}else{tempall=denall}
+tempall=SphHatGuide(x=ra[allmain],y=dec[allmain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer,multiplier=Multiplier)
 templeft=SphHatGuide(x=ra[freemain],y=dec[freemain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer)
 temp$gx=tempall$gx;temp$gy=tempall$gy;temp$gz=templeft$gz/tempall$gz
 }
