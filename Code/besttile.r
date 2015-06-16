@@ -56,7 +56,7 @@ temp=SphHatGuide(x=ra[freemain],y=dec[freemain],gx=posgrid[,1],gy=posgrid[,2],fo
 #Dengreedy tiling density
 if(TilingType=='dengreedy'){
 tempall=SphHatGuide(x=ra[allmain],y=dec[allmain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer,multiplier=Multiplier)
-templeft=SphHatGuide(x=ra[freemain],y=dec[freemain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer)
+templeft=SphHatGuide(x=ra[freemain],y=dec[freemain],gx=posgrid[,1],gy=posgrid[,2],fovrad=fovradin,lims=lims,buffer=Buffer,multiplier=Multiplier)
 temp$gx=tempall$gx;temp$gy=tempall$gy;temp$gz=templeft$gz/tempall$gz
 }
 
