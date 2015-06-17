@@ -62,7 +62,7 @@ temp$gz=templeft$gz/tempall$gz
 }
 
 #Find the best position for the tile
-tempmax=max(as.numeric(temp$gz))
+tempmax=max(as.numeric(temp$gz),na.rm=TRUE)
 besttile=which(temp$gz==tempmax,arr.ind=F)
 besttile=resample(besttile,1)
 bestra=temp$gx[besttile];bestdec=temp$gy[besttile];bestid=idsguide[temp$gloc[besttile]]
