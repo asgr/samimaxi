@@ -73,7 +73,7 @@ inputtargetfile:
 
 This file can be called whatever you like, but requires the following columns.:
 
-CATAID			Main SAMI catalogue ID (integer). This must be unique from all previous SAMI CATAID values (i.e. GAMA CATAID etc).
+CATAID			Main SAMI catalogue ID (integer). This must be unique from all previous SAMI CATAID values (i.e. GAMA CATAID etc). It also must be an integer (no alphanumeric characters allowed)
 RA			Main SAMI catalogue RA
 DEC			Main SAMI catalogue Dec
 SURVEY_SAMI		Main SAMI catalogue survey class
@@ -86,7 +86,7 @@ guidefile:
 
 This file can be called whatever you like, but requires the following columns.:
 
-GID			Guide catalogue ID. This must be unique from all previous SAMI GID values.
+GID			Guide catalogue ID. This must be unique from all previous SAMI GID values. It also must be an integer (no alphanumeric characters allowed)
 RA			Guide catalogue RA
 DEC			Guide catalogue Dec
 PSFMAG_R		Guide catalogue magnitude
@@ -97,7 +97,7 @@ specstandardsfile:
 
 This file can be called whatever you like, but requires the following columns.:
 
-SID			Spectral standards catalogue ID. This must be unique from all previous SAMI SID values.
+SID			Spectral standards catalogue ID. This must be unique from all previous SAMI SID values. It also must be an integer (no alphanumeric characters allowed)
 RA			Spectral standards catalogue RA
 DEC			Spectral standards catalogue Dec
 PRIORITY_CLASS		Spectral standards catalogue priority
