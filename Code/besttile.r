@@ -101,15 +101,31 @@ allangs=round(sph2car(ra,dec,1,deg=T) %*% t(sph2car(bestra,bestdec,radius=1,deg=
 inner=acos(allangs)*180/pi<=fovradin #Find all objects within the SAMI FoV of the best tile
 outer=acos(allangs)*180/pi>fovradin & acos(allangs)*180/pi<=fovradout #Find all objects outside the SAMI FoV of the best tile
 
+#Check we have some targets in the FoV
+if(length(inner) == 0){
+   stop("No targets in this field of view! Stopping...")
+}
+
 #Find standards near besttile
 allspecstangs=round(sph2car(raspecst,decspecst,1,deg=T) %*% t(sph2car(bestra,bestdec,radius=1,deg=T)),10) #Measure all target angles relative to best tile
 innerspecst=acos(allspecstangs)*180/pi<=fovradin #Find all objects within the SAMI FoV of the best tile
 outerspecst=acos(allspecstangs)*180/pi>fovradin & acos(allspecstangs)*180/pi<=fovradout #Find all objects outside the SAMI FoV of the best tile
 
+#Check we have some standard stars in the FoV
+if(length(innerspecst) == 0){
+   stop("No standard stars in this field of view! Stopping...")
+}
+
+
 #Find guides near besttile
 allguideangs=round(sph2car(raguide,decguide,1,deg=T) %*% t(sph2car(bestra,bestdec,radius=1,deg=T)),10) #Measure all guide angles relative to best tile
 innerguide=acos(allguideangs)*180/pi<=fovradin #Find all guides within the SAMI FoV of the best tile
 outerguide=acos(allguideangs)*180/pi>fovradin & acos(allguideangs)*180/pi<=fovradout #Find all guides outside the SAMI FoV of the best tile
+
+#Check we have some guide stars in this FoV
+if(length(innerguide) == 0){
+   stop("No guide stars in this field of view! Stopping...")
+}
 
 #unpick using all main survey targets inside the SAMI FoV (fovradin) and also the extended region (fovradout)
 priorder=unpick(ra[freemain & inner],dec[freemain & inner],ids=ids[freemain & inner],proximity=bundle2bundleproximity,Nsel=Nmainin)
